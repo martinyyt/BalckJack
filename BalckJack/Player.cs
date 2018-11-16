@@ -11,16 +11,19 @@ namespace BlackJack
         private string name;
         private List<Card> hand;
         private int cash;
+        private bool stay = false;
 
         public int Cash { get => cash; set => cash = value; }
         public string Name { get => name; set => name = value; }
         public List<Card> Hand { get => hand; set => hand = value; }
+        public bool Stay { get => stay; set => stay = value; }
 
         public Player(string name)
         {
             this.Name = name;
             this.Hand = new List<Card>();
             this.Cash = 2000;
+            this.Stay = false;
         }
 
         public void Hit(Deck deck)
@@ -28,7 +31,7 @@ namespace BlackJack
             this.Hand.Add(deck.Draw());
         }
 
-        public int GetHandWeigth() // get this working with the Aces!!!
+        public int GetHandWeigth() // working with the Aces!!!
         {
             int weigth = 0;
             foreach (var card in this.Hand)
@@ -57,9 +60,9 @@ namespace BlackJack
             return weigth;
         }
 
-        public void DrawSpecificCard()
+        public void ClearHand()
         {
-
+            this.Hand.Clear();
         }
 
         public string ShowHand()
