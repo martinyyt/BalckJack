@@ -13,7 +13,7 @@ namespace BlackJackTests
         public void GetHandWeigthTest()
         {
             // Arrange
-            Player player = new Player("player");
+            BlackJackPlayer player = new BlackJackPlayer("player");
             player.Hand = new List<Card> { new Card(Face.Ace, Suit.Club), new Card(Face.King, Suit.Club),
                 new Card(Face.Ace, Suit.Diamond), new Card(Face.Seven, Suit.Club) };
 
@@ -28,7 +28,7 @@ namespace BlackJackTests
         public void GetHandWeigthTest2()
         {
             // Arrange
-            Player player = new Player("player");
+            BlackJackPlayer player = new BlackJackPlayer("player");
             player.Hand = new List<Card> { new Card(Face.Ace, Suit.Club), new Card(Face.Two, Suit.Club),
                 new Card(Face.Ace, Suit.Diamond), new Card(Face.Seven, Suit.Club) };
 
@@ -43,7 +43,7 @@ namespace BlackJackTests
         public void GetHandWeigthTest3()
         {
             // Arrange
-            Player player = new Player("player");
+            BlackJackPlayer player = new BlackJackPlayer("player");
             player.Hand = new List<Card> { new Card(Face.Ace, Suit.Club), new Card(Face.Ace, Suit.Club),
                 new Card(Face.Ace, Suit.Diamond), new Card(Face.Seven, Suit.Club), new Card(Face.Ten, Suit.Club)  };
 

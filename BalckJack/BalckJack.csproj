@@ -45,7 +45,7 @@
     <Compile Include="Cards.cs" />
     <Compile Include="Deck.cs" />
     <Compile Include="PlayGame.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="BlackJackPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,34 +7,35 @@ using System.Threading.Tasks;
 namespace BlackJack
 {
     class PlayGame
-    {
-        static Player playerOne = new Player("Player");
-        static Player dealer = new Player("Dealer"); // the dealer will hit untill 16!!!
+    {        
+        const string Win = "won";
+        const string Lost = "lost";
+        const string Draw = "draw";
+
+        static BlackJackPlayer playerOne = new BlackJackPlayer("Player");
+        static BlackJackPlayer dealer = new BlackJackPlayer("Dealer");
         static Deck deck = new Deck();
         static int bet = 20;
-        const string win = "won";
-        const string lost = "lost";
-        const string draw = "draw";
 
         static void EndTurn(string winner)
-        {
+        {            
             switch (winner)
-            {
+            {                
                 case "won":
                     playerOne.Cash += bet;
                     Console.WriteLine("You won {0} credits", bet);
-                    Console.WriteLine("You have {0} ", playerOne.Cash);
+                    Console.WriteLine("You have {0} credits total left", playerOne.Cash);
                     Console.WriteLine();
                     break;
                 case "lost":
                     playerOne.Cash -= bet;
                     Console.WriteLine("You lost {0} credits", bet);
-                    Console.WriteLine("You have {0} ", playerOne.Cash);
+                    Console.WriteLine("You have {0} credits left", playerOne.Cash);
                     Console.WriteLine();
                     break;
                 default:
                     Console.WriteLine("It's a draw");
-                    Console.WriteLine("You have {0} ", playerOne.Cash);
+                    Console.WriteLine("You have {0} credits left", playerOne.Cash);
                     Console.WriteLine();
                     break;
             }
@@ -71,11 +72,11 @@ namespace BlackJack
                 {
                     playerOne.Hit(deck);
                 }
-                if (playerOne.GetHandWeigth() > 21)
+                if (playerOne.GetHandWeigth() > BlackJackPlayer.BlackJack)
                 {
                     playerOne.Stay = true;
                 }
-                if (dealer.GetHandWeigth() < 17)
+                if (dealer.GetHandWeigth() < BlackJackPlayer.DealerMaxHit)
                 {
                     dealer.Hit(deck);
                 }
@@ -87,40 +88,41 @@ namespace BlackJack
 
             Console.WriteLine("Dealer has: {0} / score: {1}", dealer.ShowHand(), dealer.GetHandWeigth());
             Console.WriteLine("{0} you have: {1} / score: {2}", playerOne.Name, playerOne.ShowHand(), playerOne.GetHandWeigth());
-            if (playerOne.GetHandWeigth() > 21)
+            if (playerOne.GetHandWeigth() > BlackJackPlayer.BlackJack)
             {
                 if (playerOne.GetHandWeigth() < dealer.GetHandWeigth()) //win
                 {
-                    EndTurn(win);
+                    EndTurn(Win);
                 }
                 else if (playerOne.GetHandWeigth() == dealer.GetHandWeigth()) //draw
                 {
-                    EndTurn(draw);
+                    EndTurn(Draw);
                 }
                 else if (playerOne.GetHandWeigth() > dealer.GetHandWeigth()) //lost
                 {
-                    EndTurn(lost);
+                    EndTurn(Lost);
                 }
             } //if hand above 21
-            else if (dealer.GetHandWeigth() > 21) //win
+            else if (dealer.GetHandWeigth() > BlackJackPlayer.BlackJack) //win
             {
-                EndTurn(win);
+                EndTurn(Win);
             }
             else
             {
                 if (playerOne.GetHandWeigth() > dealer.GetHandWeigth()) //win
                 {
-                    EndTurn(win);
+                    EndTurn(Win);
                 }
                 else if (playerOne.GetHandWeigth() == dealer.GetHandWeigth()) //draw
                 {
-                    EndTurn(draw);
+                    EndTurn(Draw);
                 }
                 else if (playerOne.GetHandWeigth() < dealer.GetHandWeigth()) //lost
                 {
-                    EndTurn(lost);
+                    EndTurn(Lost);
                 }
             }
+
             dealer.ClearHand();
             playerOne.ClearHand();
             playerOne.Stay = false;
@@ -141,7 +143,7 @@ namespace BlackJack
                         Console.WriteLine("Enter a valid bet greater than 0");
                     }
                 } while (bet < 1);
-                
+
                 PlayOneTurn();
 
                 Console.WriteLine("Do you want to stop playing?\n" +

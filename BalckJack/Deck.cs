@@ -39,12 +39,12 @@ namespace BlackJack
             return this.Cards.Pop();
         }
 
-        public void Draw(Player player)
+        public void Draw(BlackJackPlayer player)
         {
             player.Hand.Add(this.Draw());
         }
 
-        public void Deal(Player playerOne, Player playerTwo)
+        public void Deal(BlackJackPlayer playerOne, BlackJackPlayer playerTwo)
         {
             playerOne.Hit(this);
             playerTwo.Hit(this);
@@ -56,8 +56,8 @@ namespace BlackJack
         {
             for (int i = 0; i < cards.Count * 2; i++)
             {
-                int first = random.Next(0, 51);
-                int second = random.Next(0, 51);
+                int first = random.Next(0, cards.Count - 1);
+                int second = random.Next(0, cards.Count - 1);
                 var temp = cards[first];
                 cards[first] = cards[second];
                 cards[second] = temp;

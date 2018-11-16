@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace BlackJack
 {
-    public class Player
+    public class BlackJackPlayer
     {
+        public const int BlackJack = 21;
+        public const int DealerMaxHit = 17; // the dealer will hit untill 16 including!!!
+
         private string name;
         private List<Card> hand;
         private int cash;
@@ -18,7 +21,7 @@ namespace BlackJack
         public List<Card> Hand { get => hand; set => hand = value; }
         public bool Stay { get => stay; set => stay = value; }
 
-        public Player(string name)
+        public BlackJackPlayer(string name)
         {
             this.Name = name;
             this.Hand = new List<Card>();
@@ -38,7 +41,7 @@ namespace BlackJack
             {
                 weigth += card.Weigth;
             }
-            if (weigth>21)
+            if (weigth>BlackJack)
             {
                 int aceCount = 0;
                 for (int i = 0; i < this.Hand.Count; i++)
@@ -51,7 +54,7 @@ namespace BlackJack
                 for (int i = 1; i <= aceCount; i++)
                 {
                     weigth -= 10;
-                    if (weigth<22)
+                    if (weigth<=BlackJack)
                     {
                         return weigth;
                     }
