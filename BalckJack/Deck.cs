@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace BlackJack
 {
-    class Deck
+    public class Deck
     {
         private Stack<Card> cards;
 
         internal Stack<Card> Cards { get => cards; set => cards = value; }
         internal int CardCount { get => cards.Count; }
 
-        internal Deck()
+        public Deck()
         {
             var cards = new List<Card>();
             for (int face = 2; face < Enum.GetNames(typeof(Face)).Length + 2; face++)
@@ -34,17 +34,17 @@ namespace BlackJack
         }
         static Random random = new Random();
 
-        internal Card Draw()
+        public Card Draw()
         {
             return this.Cards.Pop();
         }
 
-        internal void Draw(Player player)
+        public void Draw(Player player)
         {
             player.Hand.Add(this.Draw());
         }
 
-        internal void Deal(Player playerOne, Player playerTwo)
+        public void Deal(Player playerOne, Player playerTwo)
         {
             playerOne.Hit(this);
             playerTwo.Hit(this);

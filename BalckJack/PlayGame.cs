@@ -95,10 +95,16 @@ namespace BlackJack
                     Console.WriteLine("You lost"); //cash
                 }
             }
+            dealer.Hand = new List<Card>();
+            playerOne.Hand = new List<Card>();
+            playerStay = false;
+            dealerStay = false;
         }
 
         static void Main(string[] args)
-        {
+        {            
+            PlayOneTurn(); //should make the betting on this method!!!
+            PlayOneTurn();
             PlayOneTurn();
         }
     }

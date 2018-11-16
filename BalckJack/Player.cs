@@ -6,44 +6,68 @@ using System.Threading.Tasks;
 
 namespace BlackJack
 {
-    class Player
+    public class Player
     {
         private string name;
         private List<Card> hand;
         private int cash;
 
-        internal int Cash { get => cash; set => cash = value; }
-        internal string Name { get => name; set => name = value; }
-        internal List<Card> Hand { get => hand; set => hand = value; }
+        public int Cash { get => cash; set => cash = value; }
+        public string Name { get => name; set => name = value; }
+        public List<Card> Hand { get => hand; set => hand = value; }
 
-        internal Player(string name)
+        public Player(string name)
         {
             this.Name = name;
             this.Hand = new List<Card>();
             this.Cash = 2000;
         }
 
-        internal void Hit(Deck deck)
+        public void Hit(Deck deck)
         {
             this.Hand.Add(deck.Draw());
         }
 
-        internal int GetHandWeigth() // get this working with the Aces!!!
+        public int GetHandWeigth() // get this working with the Aces!!!
         {
             int weigth = 0;
             foreach (var card in this.Hand)
             {
                 weigth += card.Weigth;
             }
+            if (weigth>21)
+            {
+                int aceCount = 0;
+                for (int i = 0; i < this.Hand.Count; i++)
+                {
+                    if (this.Hand[i].AltWeigth==1)
+                    {
+                        aceCount++;
+                    }
+                }
+                for (int i = 1; i <= aceCount; i++)
+                {
+                    weigth -= 10;
+                    if (weigth<22)
+                    {
+                        return weigth;
+                    }
+                }
+            }
             return weigth;
         }
 
-        internal string ShowHand()
+        public void DrawSpecificCard()
+        {
+
+        }
+
+        public string ShowHand()
         {
             return string.Concat(this.Hand);
         }
 
-        internal string ShowHiddenHand()
+        public string ShowHiddenHand()
         {
             List<string> hiddenHand = new List<string>();
             for (int i = 0; i < this.Hand.Count; i++)
